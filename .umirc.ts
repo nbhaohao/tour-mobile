@@ -29,6 +29,11 @@ export default defineConfig({
           component: '@/pages/search/index',
           title: '搜索',
         },
+        {
+          path: '/house',
+          component: '@/pages/house/index',
+          title: '房屋详情'
+        }
       ],
     },
   ],
