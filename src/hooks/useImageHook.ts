@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { isEmpty } from 'project-libs';
 
 interface UseImageHookParams {
   element: string;
@@ -14,7 +15,7 @@ function useImageHook({
   useEffect(() => {
     const nodes = document.querySelectorAll(element);
     let observer: IntersectionObserver;
-    if (nodes && nodes.length) {
+    if (!isEmpty(nodes)) {
       observer = new IntersectionObserver((entries) => {
         callback && callback(entries);
         entries.forEach((item) => {
@@ -32,7 +33,7 @@ function useImageHook({
       });
     }
     return () => {
-      if (nodes && nodes.length && observer) {
+      if (!isEmpty(nodes) && observer) {
         observer.disconnect();
       }
     };

@@ -7,16 +7,15 @@ import { Houses } from '@/types/house';
 import { useLocation } from 'umi';
 import { useImageHook } from '@/hooks/useImageHook';
 import BlackPng from '@/assets/blank.png';
+import { ShowLoading } from '@/components';
+import { CommonEnum } from '@/enums';
 
 const Search: React.FC = () => {
   // @ts-ignore
   const { query } = useLocation();
   const [houseName, setHouseName] = useState('');
   const [houseSubmitName, setHouseSubmitName] = useState('');
-  const [page, setPage] = useState({
-    pageSize: 8,
-    pageNum: 1,
-  });
+  const [page, setPage] = useState(CommonEnum.PAGE);
   const handleChange = useCallback((value) => {
     setHouseName(value);
   }, []);
@@ -35,7 +34,7 @@ const Search: React.FC = () => {
   const [housesList, setHousesList] = useState<Houses>([]);
   const [showLoading, setLoading] = useState(true);
   useObserverHook({
-    element: '#loading',
+    element: `#${CommonEnum.LOADING_ID}`,
     callback: (entries) => {
       if (loading || !entries[0].isIntersecting) {
         return;
@@ -96,11 +95,7 @@ const Search: React.FC = () => {
             </div>
           );
         })}
-        {showLoading ? (
-          <div id="loading">loading</div>
-        ) : (
-          <div>没有更多的数据了</div>
-        )}
+        <ShowLoading showLoading={showLoading} />
       </div>
     );
   };
