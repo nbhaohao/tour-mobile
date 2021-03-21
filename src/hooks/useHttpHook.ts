@@ -7,7 +7,7 @@ interface HttpHookParams {
   method?: string;
   headers?: {};
   body?: {};
-  watch?: [];
+  watch?: Array<any>;
 }
 function useHttpHook<T>({
   url,
@@ -40,7 +40,7 @@ function useHttpHook<T>({
         body: JSON.stringify(body),
       };
     }
-
+    console.log('url', 'request')
     return new Promise((resolve, reject) => {
       fetch('/api' + url, params)
         .then((res) => res.json())
