@@ -9,14 +9,14 @@ interface HttpParams {
   setResult?: (data: any) => void;
 }
 
-export async function Http({
+export async function Http<R>({
   setLoading,
   setResult,
   method = 'post',
   headers,
   body,
   url,
-}: HttpParams) {
+}: HttpParams): Promise<R> {
   setLoading && setLoading(true);
 
   const defaultHeader = {
