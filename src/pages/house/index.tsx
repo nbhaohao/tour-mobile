@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './index.less';
+import { useLocation } from 'umi';
 import { Banner } from '@/pages/house/components/Banner';
 import { Footer } from '@/pages/house/components/Footer';
 import { Info } from '@/pages/house/components/Info';
@@ -18,9 +19,11 @@ const House: React.FC = () => {
       reloadComments,
       reloadCommentsNum,
       showLoading,
+      resetData,
     },
   } = useStoreHook();
-
+  // @ts-ignore
+  const { query } = useLocation();
   useObserverHook({
     element: `#${CommonEnum.LOADING_ID}`,
     callback: (entries) => {
@@ -37,11 +40,20 @@ const House: React.FC = () => {
   });
 
   useEffect(() => {
-    getDetailAsync();
+    getDetailAsync({
+      id: query?.id,
+    });
   }, []);
   useEffect(() => {
     getCommentsAsync({});
   }, [reloadCommentsNum]);
+  useEffect(() => {
+    return () => {
+      resetData({
+        detail: {},
+      });
+    };
+  }, []);
   return (
     <div className="house-page">
       <Banner banner={detail?.banner} />
