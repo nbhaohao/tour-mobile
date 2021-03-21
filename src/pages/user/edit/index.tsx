@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { List, ImagePicker, Toast, InputItem, Button } from 'antd-mobile';
 import * as RCForm from 'rc-form';
 import { FormComponentProps } from 'rc-form';
+import { useStoreHook } from 'think-react-store';
 
 const { createForm } = RCForm;
 
@@ -19,6 +20,9 @@ const index: React.FC<EditProps & FormComponentProps> = (props) => {
     form: { getFieldProps, validateFields },
   } = props;
   const [files, setFiles] = useState<Array<UserImageFile>>([]);
+  const {
+    user: { editUserAsync },
+  } = useStoreHook();
   const maxSize = 0.1;
   const handleChange = (files: Array<UserImageFile>) => {
     if (files[0].file) {
@@ -34,11 +38,16 @@ const index: React.FC<EditProps & FormComponentProps> = (props) => {
       Toast.fail('请上传图片');
       return;
     }
-    void validateFields((error, value) => {
+    void validateFields((error, values: any) => {
       if (error) {
         Toast.fail('请将信息补充完整');
         return;
       }
+      editUserAsync({
+        img: files[0].url,
+        tel: values.tel,
+        sign: values.sign,
+      });
     });
   };
   return (

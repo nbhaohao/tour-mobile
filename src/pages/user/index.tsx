@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { List } from 'antd-mobile';
 import './index.less';
 import { history } from 'umi';
+import { useStoreHook } from 'think-react-store';
 
 const Index: React.FC = () => {
+  const {
+    user: { getUserAsync, username, avatar, tel, sign },
+  } = useStoreHook();
   const handleClick = () => {
     history.push({
       pathname: '/user/edit',
@@ -12,6 +16,11 @@ const Index: React.FC = () => {
       },
     });
   };
+  useEffect(() => {
+    getUserAsync({
+      id: 10,
+    });
+  }, []);
   return (
     <div className="user-page">
       <div className="info">
@@ -19,9 +28,9 @@ const Index: React.FC = () => {
           设置
         </div>
         <div className="user">
-          <img alt="user" src={''} />
-          <div className="tel">{'tel'}</div>
-          <div className="sign">{'sign'}</div>
+          <img alt="user" src={avatar} />
+          <div className="tel">{tel}</div>
+          <div className="sign">{sign}</div>
         </div>
       </div>
       <div className="lists">
