@@ -5,11 +5,12 @@ import { useHttpHook } from '@/hooks/useHttpHook';
 import { useObserverHook } from '@/hooks/useObserverHook';
 import { Houses } from '@/types/house';
 import { useLocation } from 'umi';
+import { useImageHook } from '@/hooks/useImageHook';
+import BlackPng from '@/assets/blank.png';
 
 const Search: React.FC = () => {
   // @ts-ignore
   const { query } = useLocation();
-  console.log(query);
   const [houseName, setHouseName] = useState('');
   const [houseSubmitName, setHouseSubmitName] = useState('');
   const [page, setPage] = useState({
@@ -41,6 +42,9 @@ const Search: React.FC = () => {
       }
       setPage((value) => ({ ...value, pageNum: value.pageNum + 1 }));
     },
+  });
+  useImageHook({
+    element: '.item-img',
   });
   useEffect(() => {
     if (!loading && houses) {
@@ -79,7 +83,12 @@ const Search: React.FC = () => {
         {result.map(({ id, img, title, price }) => {
           return (
             <div className="item" key={id}>
-              <img alt="img" src={img} />
+              <img
+                data-src={img}
+                className="item-img"
+                alt="img"
+                src={BlackPng}
+              />
               <div className="item-right">
                 <div className="title">{title}</div>
                 <div className="price">¥{price}</div>
