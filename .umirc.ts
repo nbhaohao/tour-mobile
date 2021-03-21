@@ -5,7 +5,28 @@ export default defineConfig({
     type: 'none',
   },
   routes: [
-    { path: '/', component: '@/pages/index' },
+    {
+      path: '/',
+      component: '@/layouts/index',
+      routes: [
+        {
+          path: '/',
+          component: '@/pages/home/index',
+          title: '首页',
+        },
+        {
+          path: '/order',
+          component: '@/pages/order/index',
+          title: '订单',
+        },
+        {
+          path: '/user',
+          component: '@/pages/user/index',
+          title: '我的',
+        },
+      ],
+    },
   ],
   fastRefresh: {},
+  extraBabelPlugins: [['import', { libraryName: 'antd-mobile', style: 'css' }]],
 });
