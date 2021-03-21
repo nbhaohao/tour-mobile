@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 import { useLocation } from 'umi';
 import { MenuBar } from '@/components';
+import { StoreProvider } from 'think-react-store';
+import * as store from '@/stores';
 
 const Index: React.FC = ({ children }) => {
   const location = useLocation();
@@ -8,10 +10,10 @@ const Index: React.FC = ({ children }) => {
   const pathname = location.pathname;
   const isShow = needBarPaths.includes(pathname);
   return (
-    <div>
+    <StoreProvider store={store}>
       {children}
       <MenuBar pathname={pathname} show={isShow} />
-    </div>
+    </StoreProvider>
   );
 };
 

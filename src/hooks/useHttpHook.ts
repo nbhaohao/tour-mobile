@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Toast } from 'antd-mobile';
+import { Http } from '@/utils/http';
 
 interface HttpHookParams {
   url: string;
@@ -20,51 +20,15 @@ function useHttpHook<T>({
   const [result, setResult] = useState<T>(defaultValue);
   const [loading, setLoading] = useState(true);
 
-  async function Http() {
-    setLoading(true);
-
-    const defaultHeader = {
-      'Content-type': 'application/json',
-    };
-
-    let params: any;
-    if (method.toUpperCase() === 'GET') {
-      params = undefined;
-    } else {
-      params = {
-        headers: {
-          ...defaultHeader,
-          headers,
-        },
-        method,
-        body: JSON.stringify(body),
-      };
-    }
-    console.log('url', 'request')
-    return new Promise((resolve, reject) => {
-      fetch('/api' + url, params)
-        .then((res) => res.json())
-        .then((res) => {
-          if (res.status === 200) {
-            resolve(res.data);
-            setResult(res.data);
-          } else {
-            Toast.fail(res.errMsg);
-            reject(res.errMsg);
-          }
-        })
-        .catch((err) => {
-          Toast.fail(err);
-          reject(err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    });
-  }
-
   useEffect(() => {
-    void Http();
+    void Http({
+      setLoading,
+      setResult,
+      method,
+      headers,
+      body,
+      url,
+    });
   }, watch);
 
   return [result as T, loading];

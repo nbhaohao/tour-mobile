@@ -1,0 +1,1 @@
+export { house } from './house';

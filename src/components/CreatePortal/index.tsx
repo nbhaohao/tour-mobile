@@ -20,7 +20,7 @@ const CreatePortal: React.FC<CreatePortalProps> = ({ children, style }) => {
         body.removeChild(el);
       }
     };
-  }, []);
+  }, [style]);
   return ReactDOM.createPortal(children, el);
 };
 

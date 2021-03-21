@@ -27,6 +27,7 @@
     "project-libs": "^1.1.5",
     "react-awesome-swiper": "^1.4.16",
     "react-icons": "^4.2.0",
+    "think-react-store": "^1.6.71",
     "umi": "^3.4.3"
   },
   "devDependencies": {
