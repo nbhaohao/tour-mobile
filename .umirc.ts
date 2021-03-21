@@ -25,6 +25,11 @@ export default defineConfig({
           title: '我的',
         },
         {
+          path: '/user/edit',
+          component: '@/pages/user/edit',
+          title: '设置用户',
+        },
+        {
           path: '/search',
           component: '@/pages/search/index',
           title: '搜索',
@@ -32,8 +37,8 @@ export default defineConfig({
         {
           path: '/house',
           component: '@/pages/house/index',
-          title: '房屋详情'
-        }
+          title: '房屋详情',
+        },
       ],
     },
   ],
