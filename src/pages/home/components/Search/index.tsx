@@ -1,18 +1,14 @@
 import React, { useCallback, useState } from 'react';
 import { Picker, List, Calendar, Button } from 'antd-mobile';
 import dayjs from 'dayjs';
+import { Cities } from '@/types/city';
 
-const CITIES = [
-  [
-    { label: '杭州', value: '10001' },
-    {
-      label: '苏州',
-      value: '10002',
-    },
-  ],
-];
+interface SearchProps {
+  cities: Cities;
+  citiesLoading: boolean;
+}
 
-const Search: React.FC = () => {
+const Search: React.FC<SearchProps> = ({ cities, citiesLoading }) => {
   const [selectedCity, setSelectedCity] = useState(['10001']);
   const handleCityChange = useCallback((value) => {
     setSelectedCity(value);
@@ -24,8 +20,6 @@ const Search: React.FC = () => {
   }, [setDateShow]);
   const handleDateConfirm = useCallback(
     (startTime, endTime) => {
-      console.log('startTime', startTime);
-      console.log('endTime', endTime);
       setTimes(
         `${dayjs(startTime).format('YYYY-MM-DD')} ~ ${dayjs(endTime).format(
           'YYYY-MM-DD',
@@ -38,16 +32,18 @@ const Search: React.FC = () => {
   return (
     <div className="search">
       <div className="search-addr">
-        <Picker
-          title="城市"
-          data={CITIES}
-          value={selectedCity}
-          cascade={false}
-          cols={1}
-          onChange={handleCityChange}
-        >
-          <List.Item>可选城市</List.Item>
-        </Picker>
+        {citiesLoading ? null : (
+          <Picker
+            title="城市"
+            data={cities}
+            value={selectedCity}
+            cascade={false}
+            cols={1}
+            onChange={handleCityChange}
+          >
+            <List.Item>可选城市</List.Item>
+          </Picker>
+        )}
       </div>
       <div className="search-time" onClick={handleDate}>
         <p className="search-time_left">出租时间</p>
