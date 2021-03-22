@@ -27,26 +27,22 @@ const index: React.FC<LoginProps & FormComponentProps> = ({ form }) => {
   return (
     <div className="login-page">
       <List renderHeader={() => '用户登录'}>
-        <List.Item>
-          <InputItem
-            placeholder="用户名"
-            {...getFieldProps('username', {
-              rules: [{ required: true }],
-            })}
-          >
-            用户名：
-          </InputItem>
-        </List.Item>
-        <List.Item>
-          <InputItem
-            placeholder="密码"
-            {...getFieldProps('password', {
-              rules: [{ required: true }],
-            })}
-          >
-            密码：
-          </InputItem>
-        </List.Item>
+        <InputItem
+          placeholder="用户名"
+          {...getFieldProps('username', {
+            rules: [{ required: true }],
+          })}
+        >
+          用户名：
+        </InputItem>
+        <InputItem
+          placeholder="密码"
+          {...getFieldProps('password', {
+            rules: [{ required: true }],
+          })}
+        >
+          密码：
+        </InputItem>
       </List>
       <Button type="warning" onClick={handleSubmit}>
         登录

@@ -1,6 +1,8 @@
 import { Http } from '@/utils/http';
 import { Toast } from 'antd-mobile';
 import { history } from 'umi';
+import { cookie, urlGet } from 'project-libs';
+import { User } from '@/types/user';
 
 export const user = {
   state: {
@@ -48,11 +50,13 @@ export const user = {
       }
     },
     async loginAsync(dispatch: any, rootState: any, payload: any) {
-      const result = await Http({
+      const result = await Http<User>({
         url: '/user/login',
         body: payload,
       });
       if (result) {
+        history.push(urlGet('from') || '/');
+        cookie.set('user', result);
         Toast.success('登录成功');
       }
     },
