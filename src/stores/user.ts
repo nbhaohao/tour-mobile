@@ -47,5 +47,14 @@ export const user = {
         history.push('/user');
       }
     },
+    async loginAsync(dispatch: any, rootState: any, payload: any) {
+      const result = await Http({
+        url: '/user/login',
+        body: payload,
+      });
+      if (result) {
+        Toast.success('登录成功');
+      }
+    },
   },
 };
