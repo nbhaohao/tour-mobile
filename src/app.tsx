@@ -1,5 +1,6 @@
 import { cookie } from 'project-libs';
 import { history } from 'umi';
+import './global.css';
 
 export function onRouteChange(route: any) {
   const nowPath = route.routes[0].routes.filter(

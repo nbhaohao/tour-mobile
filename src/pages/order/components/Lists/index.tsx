@@ -4,6 +4,7 @@ import { isEmpty } from 'project-libs';
 import { Item } from '../Item';
 import { Orders, OrderType } from '@/types/order';
 import { ShowLoading } from '@/components/ShowLoading';
+import { OrderSkeletons } from '@/skeletons/OrderSkeletons';
 
 interface ListsProps {
   orders: Orders;
@@ -15,7 +16,7 @@ const Lists: React.FC<ListsProps> = ({ orders, type, showLoading }) => {
   return (
     <div>
       {isEmpty(orders) ? (
-        <ActivityIndicator toast />
+        <OrderSkeletons />
       ) : (
         <div className="tab-lists">
           {orders.map((order) => {
