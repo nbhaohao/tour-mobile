@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { memo, useCallback, useState } from 'react';
 import { Picker, List, Calendar, Button, Toast } from 'antd-mobile';
 import dayjs from 'dayjs';
 import { Cities } from '@/types/city';
@@ -9,7 +9,7 @@ interface SearchProps {
   citiesLoading: boolean;
 }
 
-const Search: React.FC<SearchProps> = ({ cities, citiesLoading }) => {
+const Search: React.FC<SearchProps> = memo(({ cities, citiesLoading }) => {
   const [selectedCity, setSelectedCity] = useState(['10001']);
   const handleCityChange = useCallback((value) => {
     setSelectedCity(value);
@@ -75,6 +75,6 @@ const Search: React.FC<SearchProps> = ({ cities, citiesLoading }) => {
       />
     </div>
   );
-};
+});
 
 export { Search };

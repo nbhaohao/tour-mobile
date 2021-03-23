@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { history } from 'umi';
 import { House, Houses } from '@/types/house';
 
@@ -6,7 +6,7 @@ interface HotProps {
   houses: Houses;
 }
 
-const Hot: React.FC<HotProps> = ({ houses }) => {
+const Hot: React.FC<HotProps> = memo(({ houses }) => {
   const handleClick = (id: number) => {
     history.push({
       pathname: '/house',
@@ -43,6 +43,6 @@ const Hot: React.FC<HotProps> = ({ houses }) => {
       {renderHouses(houses)}
     </div>
   );
-};
+});
 
 export { Hot };

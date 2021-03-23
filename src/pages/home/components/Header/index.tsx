@@ -2,10 +2,8 @@ import React, { useEffect } from 'react';
 import { Link } from 'umi';
 import { cookie } from 'project-libs';
 
-const Header: React.FC = () => {
-  useEffect(() => {
-    console.log(cookie.get('user'));
-  });
+const Header: React.FC = React.memo(() => {
+  useEffect(() => {});
   const userFromCookie: any = cookie.get('user');
   return (
     <div className="header">
@@ -22,6 +20,6 @@ const Header: React.FC = () => {
       </div>
     </div>
   );
-};
+});
 
 export { Header };
