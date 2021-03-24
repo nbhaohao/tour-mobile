@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { List } from 'antd-mobile';
+import { List, Button } from 'antd-mobile';
 import './index.less';
 import { history } from 'umi';
 import { useStoreHook } from 'think-react-store';
 
 const Index: React.FC = () => {
   const {
-    user: { getUserAsync, username, avatar, tel, sign },
+    user: { getUserAsync, logoutAsync, username, avatar, tel, sign },
   } = useStoreHook();
   const handleClick = () => {
     history.push({
@@ -15,6 +15,9 @@ const Index: React.FC = () => {
         id: '10',
       },
     });
+  };
+  const handleLogout = () => {
+    logoutAsync();
   };
   useEffect(() => {
     getUserAsync({
@@ -28,7 +31,12 @@ const Index: React.FC = () => {
           设置
         </div>
         <div className="user">
-          <img alt="user" src={avatar} />
+          <img
+            alt="user"
+            src={
+              avatar || 'https://www.dute.org/imgplaceholder/80x80?fontsize=12'
+            }
+          />
           <div className="tel">{tel}</div>
           <div className="sign">{sign}</div>
         </div>
@@ -40,6 +48,9 @@ const Index: React.FC = () => {
           <List.Item arrow="horizontal">联系客服</List.Item>
         </List>
       </div>
+      <Button style={{ marginTop: '100px' }} onClick={handleLogout}>
+        退出登录
+      </Button>
     </div>
   );
 };
