@@ -6,7 +6,7 @@ export default {
         const testData = [
           {
             id: 1,
-            img: 'https://via.placeholder.com/150',
+            img: 'https://www.dute.org/imgplaceholder/150x150?fontsize=12',
             title: '东城民宿',
             info: '东城区交通方便',
             price: '100',
@@ -14,7 +14,7 @@ export default {
           },
           {
             id: 2,
-            img: 'https://via.placeholder.com/150',
+            img: 'https://www.dute.org/imgplaceholder/150x150?fontsize=12',
             title: '西城民宿',
             info: '西城区山水怡情',
             price: '120',
@@ -22,7 +22,7 @@ export default {
           },
           {
             id: 3,
-            img: 'https://via.placeholder.com/150',
+            img: 'https://www.dute.org/imgplaceholder/150x150?fontsize=12',
             title: '新区民宿',
             info: '新区民宿位置优越',
             price: '200',

@@ -26,7 +26,7 @@ export default {
           data: new Array(8).fill('').map((value, index) => {
             const item = {
               id: `${index}-${req.body.pageNum}`,
-              img: 'https://via.placeholder.com/150?text=Click me',
+              img: 'https://www.dute.org/imgplaceholder/150x150?fontsize=12&text=点击我',
               ...locationItems[index % locationItems.length],
             };
             item.title = `${req.body.pageNum}-${item.title}`;
@@ -47,9 +47,9 @@ export default {
       data: {
         id: 8,
         banner: [
-          'https://via.placeholder.com/150?text=slide 1',
-          'https://via.placeholder.com/150?text=slide 2',
-          'https://via.placeholder.com/150?text=slide 3',
+          'https://www.dute.org/imgplaceholder/150x150?fontsize=12&text=silde 1',
+          'https://www.dute.org/imgplaceholder/150x150?fontsize=12&text=silde 2',
+          'https://www.dute.org/imgplaceholder/150x150?fontsize=12&text=silde 3',
         ],
         info: {
           id: 8,
@@ -72,7 +72,7 @@ export default {
         data = new Array(8).fill('').map((value, index) => {
           return {
             id: `${index}-${req.body.pageNum}`,
-            avatar: 'https://via.placeholder.com/150',
+            avatar: 'https://www.dute.org/imgplaceholder/150x150?fontsize=12',
             username: `user-${index}-${req.body.pageNum}`,
             createTime: 1595238771000,
             info: examples[index % examples.length],

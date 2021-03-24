@@ -5,7 +5,7 @@ export default {
       data: {
         id: 10,
         username: '测试用户',
-        avatar: 'https://via.placeholder.com/70',
+        avatar: 'https://www.dute.org/imgplaceholder/80x80?fontsize=12',
         tel: '1313131313',
         sign: '个性签名123213123',
       },

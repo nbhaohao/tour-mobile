@@ -13,15 +13,19 @@ export async function Http<R>({
   setLoading,
   setResult,
   method = 'post',
-  headers,
+  headers = {},
   body,
   url,
 }: HttpParams): Promise<R> {
   setLoading && setLoading(true);
 
-  const defaultHeader = {
+  const token = localStorage.getItem('token');
+  const defaultHeader: { [key: string]: string } = {
     'Content-type': 'application/json',
   };
+  if (token) {
+    defaultHeader.token = token;
+  }
 
   let params: any;
   if (method.toUpperCase() === 'GET') {
