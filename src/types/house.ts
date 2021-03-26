@@ -1,6 +1,6 @@
 export interface House {
   id: number;
-  img: string;
+  imgs: Array<{ url: string }>;
   title: string;
   info: string;
   msg: string;

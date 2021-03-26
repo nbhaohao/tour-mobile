@@ -14,8 +14,9 @@ const Home: React.FC = () => {
     method: 'get',
   });
   const [houses] = useHttpHook<Houses>({
-    url: '/houses/hot',
+    url: '/house/hot',
     defaultValue: [],
+    method: 'get',
   });
   return (
     <div className="home">
