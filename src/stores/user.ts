@@ -9,7 +9,7 @@ export const user = {
     id: undefined,
     username: undefined,
     avatar: undefined,
-    tel: undefined,
+    phone: undefined,
     sign: undefined,
   },
   reducers: {
@@ -32,12 +32,14 @@ export const user = {
         url: '/user/detail',
         body: payload,
       });
+      console.log('user', user)
       if (user) {
         dispatch({
           type: 'getUser',
           payload: user,
         });
       }
+      return user;
     },
     async editUserAsync(dispatch: any, rootState: any, payload: any) {
       const result = await Http({

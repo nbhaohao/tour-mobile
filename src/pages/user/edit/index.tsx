@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { List, ImagePicker, Toast, InputItem, Button } from 'antd-mobile';
 import * as RCForm from 'rc-form';
 import { FormComponentProps } from 'rc-form';
@@ -17,12 +17,29 @@ interface EditProps {}
 
 const index: React.FC<EditProps & FormComponentProps> = (props) => {
   const {
-    form: { getFieldProps, validateFields },
+    form: { getFieldProps, validateFields, setFieldsValue },
   } = props;
   const [files, setFiles] = useState<Array<UserImageFile>>([]);
   const {
-    user: { editUserAsync },
+    user: { editUserAsync, getUserAsync, avatar, phone, sign, id },
   } = useStoreHook();
+  useEffect(() => {
+    getUserAsync();
+  }, []);
+  useEffect(() => {
+    if (id) {
+      setFieldsValue(
+        {
+          phone: phone || '',
+          sign: sign || '',
+        },
+        () => {},
+      );
+      if (avatar) {
+        setFiles([{ url: avatar }]);
+      }
+    }
+  }, [id, setFieldsValue, setFiles]);
   const maxSize = 0.1;
   const handleChange = (files: Array<UserImageFile>) => {
     if (files[0].file) {
@@ -44,8 +61,8 @@ const index: React.FC<EditProps & FormComponentProps> = (props) => {
         return;
       }
       editUserAsync({
-        img: files[0].url,
-        tel: values.tel,
+        avatar: files[0].url,
+        phone: values.phone,
         sign: values.sign,
       });
     });
@@ -53,35 +70,29 @@ const index: React.FC<EditProps & FormComponentProps> = (props) => {
   return (
     <div className="user-edit">
       <List>
-        <List.Item>
-          <ImagePicker
-            files={files}
-            selectable={files.length < 1}
-            onChange={handleChange}
-          />
-        </List.Item>
-        <List.Item>
-          <InputItem
-            {...getFieldProps('tel', {
-              rules: [{ required: true }],
-              initialValue: '123',
-            })}
-            placeholder="电话"
-          >
-            电话：
-          </InputItem>
-        </List.Item>
-        <List.Item>
-          <InputItem
-            {...getFieldProps('sign', {
-              rules: [{ required: true }],
-              initialValue: '签名',
-            })}
-            placeholder="签名"
-          >
-            签名：
-          </InputItem>
-        </List.Item>
+        <ImagePicker
+          files={files}
+          selectable={files.length < 1}
+          onChange={handleChange}
+        />
+        <InputItem
+          {...getFieldProps('phone', {
+            rules: [{ required: true }],
+            initialValue: '',
+          })}
+          placeholder="电话"
+        >
+          电话：
+        </InputItem>
+        <InputItem
+          {...getFieldProps('sign', {
+            rules: [{ required: true }],
+            initialValue: '签名',
+          })}
+          placeholder="签名"
+        >
+          签名：
+        </InputItem>
       </List>
       <Button type="warning" style={{ marginTop: 20 }} onClick={handleSubmit}>
         修改

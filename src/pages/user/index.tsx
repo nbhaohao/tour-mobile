@@ -6,7 +6,7 @@ import { useStoreHook } from 'think-react-store';
 
 const Index: React.FC = () => {
   const {
-    user: { getUserAsync, logoutAsync, username, avatar, tel, sign },
+    user: { getUserAsync, logoutAsync, username, avatar, phone, sign },
   } = useStoreHook();
   const handleClick = () => {
     history.push({
@@ -37,7 +37,7 @@ const Index: React.FC = () => {
               avatar || 'https://www.dute.org/imgplaceholder/80x80?fontsize=12'
             }
           />
-          <div className="tel">{tel}</div>
+          <div className="tel">{phone}</div>
           <div className="sign">{sign}</div>
         </div>
       </div>
