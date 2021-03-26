@@ -11,6 +11,7 @@ const Home: React.FC = () => {
   const [cities, citiesLoading] = useHttpHook<Cities>({
     url: '/commons/cities',
     defaultValue: [],
+    method: 'get',
   });
   const [houses] = useHttpHook<Houses>({
     url: '/houses/hot',
@@ -19,8 +20,8 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       <Header />
-      <Search cities={cities} citiesLoading={citiesLoading} />
-      <Hot houses={houses} />
+      <Search cities={cities || []} citiesLoading={citiesLoading} />
+      <Hot houses={houses || []} />
     </div>
   );
 };

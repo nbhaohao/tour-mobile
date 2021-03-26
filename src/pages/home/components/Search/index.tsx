@@ -52,7 +52,7 @@ const Search: React.FC<SearchProps> = memo(({ cities, citiesLoading }) => {
           <Picker
             title="城市"
             data={cities}
-            value={selectedCity}
+            value={cities.length === 0 ? [] : selectedCity}
             cascade={false}
             cols={1}
             onChange={handleCityChange}

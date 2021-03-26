@@ -32,7 +32,7 @@ export const user = {
         url: '/user/detail',
         body: payload,
       });
-      console.log('user', user)
+      console.log('user', user);
       if (user) {
         dispatch({
           type: 'getUser',
@@ -60,7 +60,6 @@ export const user = {
         localStorage.setItem('token', result.token);
         localStorage.setItem('username', result.username);
         history.push(urlGet('from') || '/');
-        // cookie.set('user', result);
         Toast.success('登录成功');
       }
     },

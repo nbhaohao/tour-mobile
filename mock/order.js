@@ -31,7 +31,7 @@ export default {
           {
             id: 4,
             img:
-              'http://img1.mukewang.com/szimg/5a1f65a900015d1505400300-360-202.jpg',
+              'https://www.dute.org/imgplaceholder/150x150?fontsize=12',
             title: '老城民宿',
             info: '老城区风景秀美',
             price: '220',

@@ -27,18 +27,15 @@ export async function Http<R>({
     defaultHeader.token = token;
   }
 
-  let params: any;
-  if (method.toUpperCase() === 'GET') {
-    params = undefined;
-  } else {
-    params = {
-      headers: {
-        ...defaultHeader,
-        headers,
-      },
-      method,
-      body: JSON.stringify(body),
-    };
+  let params: any = {
+    headers: {
+      ...defaultHeader,
+      headers,
+    },
+    method,
+  };
+  if (method.toUpperCase() === 'POST') {
+    params.body = JSON.stringify(body);
   }
   return new Promise((resolve, reject) => {
     fetch('/api' + url, params)
@@ -49,8 +46,8 @@ export async function Http<R>({
           setResult && setResult(res.data);
         } else {
           if (res.status === 1001) {
-            location.href = `/login?from=${location.pathname}`;
-            localStorage.clear()
+            // location.href = `/login?from=${location.pathname}`;
+            // localStorage.clear()
           }
           Toast.fail(res.errMsg);
           reject(res.errMsg);
