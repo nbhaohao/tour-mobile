@@ -59,7 +59,8 @@ export const user = {
       if (result) {
         localStorage.setItem('token', result.token);
         localStorage.setItem('username', result.username);
-        history.push(urlGet('from') || '/');
+        console.log('333', window.decodeURIComponent(urlGet('from') || ''));
+        history.push(window.decodeURIComponent(urlGet('from') || '') || '/');
         Toast.success('登录成功');
       }
     },
@@ -82,7 +83,9 @@ export const user = {
       Toast.success('退出登录成功');
       setTimeout(() => {
         localStorage.clear();
-        location.href = `/login?from=${location.pathname}`;
+        location.href = `/login?from=${window.encodeURIComponent(
+          location.pathname + location.search,
+        )}`;
       }, 1000);
     },
   },
