@@ -1,7 +1,7 @@
 export interface House {
   id: number;
   imgs: Array<{ url: string }>;
-  title: string;
+  name: string;
   info: string;
   msg: string;
   price: string;

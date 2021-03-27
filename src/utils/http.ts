@@ -46,8 +46,8 @@ export async function Http<R>({
           setResult && setResult(res.data);
         } else {
           if (res.status === 1001) {
-            // location.href = `/login?from=${location.pathname}`;
-            // localStorage.clear()
+            location.href = `/login?from=${location.pathname}`;
+            localStorage.clear()
           }
           Toast.fail(res.errMsg);
           reject(res.errMsg);

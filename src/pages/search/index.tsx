@@ -56,7 +56,7 @@ const Search: React.FC = () => {
         setLoading(false);
       }
     }
-  }, [loading, houses, page.pageSize]);
+  }, [loading, houses, page.pageSize, setLoading]);
   const _handleSubmit = (value: string) => {
     setHouseName(value);
     setHouseSubmitName(value);
@@ -79,17 +79,17 @@ const Search: React.FC = () => {
     }
     return (
       <div className="result">
-        {result.map(({ id, img, title, price }) => {
+        {result.map(({ id, imgs, name, price }) => {
           return (
             <div className="item" key={id}>
               <img
-                data-src={img}
+                data-src={imgs?.[0]?.url || ''}
                 className="item-img"
                 alt="img"
                 src={BlackPng}
               />
               <div className="item-right">
-                <div className="title">{title}</div>
+                <div className="title">{name}</div>
                 <div className="price">¥{price}</div>
               </div>
             </div>
