@@ -9,6 +9,7 @@ import { useImageHook } from '@/hooks/useImageHook';
 import BlackPng from '@/assets/blank.png';
 import { ShowLoading } from '@/components';
 import { CommonEnum } from '@/enums';
+import { history } from '@@/core/history';
 
 const Search: React.FC = () => {
   // @ts-ignore
@@ -81,7 +82,18 @@ const Search: React.FC = () => {
       <div className="result">
         {result.map(({ id, imgs, name, price }) => {
           return (
-            <div className="item" key={id}>
+            <div
+              className="item"
+              key={id}
+              onClick={() => {
+                history.push({
+                  pathname: '/house',
+                  query: {
+                    id: id.toString(),
+                  },
+                });
+              }}
+            >
               <img
                 data-src={imgs?.[0]?.url || ''}
                 className="item-img"

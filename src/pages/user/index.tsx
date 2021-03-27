@@ -11,9 +11,6 @@ const Index: React.FC = () => {
   const handleClick = () => {
     history.push({
       pathname: '/user/edit',
-      query: {
-        id: '10',
-      },
     });
   };
   const handleLogout = () => {

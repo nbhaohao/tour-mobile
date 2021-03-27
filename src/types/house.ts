@@ -8,6 +8,7 @@ export interface House {
   publishTime?: number;
   startTime?: number;
   endTime?: number;
+  show_count: number;
 }
 
 export interface HouseDetail {

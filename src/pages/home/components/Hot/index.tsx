@@ -20,7 +20,7 @@ const Hot: React.FC<HotProps> = memo(({ houses }) => {
     return (
       <div className="hot-lists">
         {houseList.map((house) => {
-          const { id, imgs, title, info, price } = house;
+          const { id, imgs, name, info, price } = house;
           return (
             <div
               className="hot-lists-item"
@@ -28,7 +28,7 @@ const Hot: React.FC<HotProps> = memo(({ houses }) => {
               onClick={() => handleClick(id)}
             >
               <img className="img" alt="img" src={imgs?.[0]?.url || ''} />
-              <div className="title">{title}</div>
+              <div className="title">{name}</div>
               <div className="info">{info}</div>
               <div className="price">¥{price}</div>
             </div>

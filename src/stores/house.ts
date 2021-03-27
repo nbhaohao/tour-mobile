@@ -52,8 +52,8 @@ export const house = {
   effects: {
     async getDetailAsync(dispatch: any, rootState: any, payload: any) {
       const detail = await Http({
-        url: '/house/detail',
-        body: payload,
+        url: `/house/detail?id=${payload.id}`,
+        method: 'get',
       });
       dispatch({
         type: 'getDetail',
@@ -61,7 +61,6 @@ export const house = {
       });
     },
     async getCommentsAsync(dispatch: any, rootState: any, payload: any) {
-      console.log('rootState', rootState);
       const { comments, page } = rootState.house;
       const lists: any = await Http({
         url: '/comments/lists',

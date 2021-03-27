@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import AwesomeSwiper from 'react-awesome-swiper';
 
 interface BannerProps {
-  banner: string[];
+  banner: Array<{ url: string }>;
 }
 
 const Banner: React.FC<BannerProps> = ({ banner }) => {
@@ -18,7 +18,7 @@ const Banner: React.FC<BannerProps> = ({ banner }) => {
   return (
     <AwesomeSwiper className="banner" config={config}>
       <div className="swiper-wrapper">
-        {(banner || []).map((url) => (
+        {(banner || []).map(({ url }) => (
           <div key={url} className="swiper-slide">
             <img alt="banner" src={url} />
           </div>

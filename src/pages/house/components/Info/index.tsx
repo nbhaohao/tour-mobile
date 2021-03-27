@@ -10,7 +10,8 @@ interface InfoProps {
 const Info: React.FC<InfoProps> = ({ detail }) => {
   return (
     <div className="info">
-      <div className="info-title">{detail?.title}</div>
+      <div className="info-title">{detail?.name}</div>
+      <div className="info-msg">访问量：{detail?.show_count}</div>
       <div className="info-msg">简介：{detail?.info}</div>
       <div className="info-price">价格：{detail?.price}</div>
       <div className="info-time">发布时间：{timer(detail?.publishTime)}</div>
