@@ -32,7 +32,6 @@ export const user = {
         url: '/user/detail',
         body: payload,
       });
-      console.log('user', user);
       if (user) {
         dispatch({
           type: 'getUser',
@@ -73,6 +72,7 @@ export const user = {
       localStorage.setItem('username', result.username);
       if (result) {
         Toast.success('注册成功');
+        history.push(window.decodeURIComponent(urlGet('from') || '') || '/');
       }
     },
     async logoutAsync(dispatch: any, rootState: any, payload: any) {
