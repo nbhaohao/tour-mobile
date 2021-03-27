@@ -1,6 +1,7 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
+  publicPath: process.env.NODE_ENV === 'production' ? '/tour-mobile/' : '/',
   nodeModulesTransform: {
     type: 'none',
   },
