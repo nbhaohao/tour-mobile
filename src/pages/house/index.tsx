@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import './index.less';
 import { useLocation } from 'umi';
 import { Banner } from '@/pages/house/components/Banner';
@@ -20,6 +20,10 @@ const House: React.FC = () => {
       reloadCommentsNum,
       showLoading,
       resetData,
+      order,
+      hasOrderAsync,
+      addOrderAsync,
+      delOrderAsync,
     },
   } = useStoreHook();
   // @ts-ignore
@@ -38,7 +42,11 @@ const House: React.FC = () => {
     },
     watch: [comments, showLoading],
   });
-
+  useEffect(() => {
+    hasOrderAsync({
+      id: query?.id,
+    });
+  }, []);
   useEffect(() => {
     getDetailAsync({
       id: query?.id,
@@ -56,10 +64,24 @@ const House: React.FC = () => {
       });
     };
   }, []);
+  const handleOrder = useCallback(
+    (id: number) => {
+      if (!id) {
+        addOrderAsync({
+          id: query?.id,
+        });
+        return;
+      }
+      delOrderAsync({
+        id,
+      });
+    },
+    [addOrderAsync, delOrderAsync, query],
+  );
   return (
     <div className="house-page">
       <Banner banner={detail?.banner} />
-      <Info detail={detail?.info} />
+      <Info detail={detail?.info} order={order} onHandleOrder={handleOrder} />
       <Lists showLoading={showLoading} lists={comments} />
       <Footer />
     </div>

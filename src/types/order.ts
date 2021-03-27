@@ -9,7 +9,8 @@ export interface Order {
   title: string;
   info: string;
   price: string;
-  createTime: string;
+  create_time: string;
+  is_payed: OrderType;
 }
 
 export type Orders = Array<Order>;

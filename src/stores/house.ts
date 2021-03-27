@@ -1,6 +1,18 @@
 import { Http } from '@/utils/http';
 import { CommonEnum } from '@/enums';
 
+async function handleOrder(url: string, dispatch: any, payload: any) {
+  const result = await Http({
+    url,
+    body: payload,
+  });
+  dispatch({
+    type: 'setOrder',
+    payload: result,
+  });
+  return result;
+}
+
 export const house = {
   state: {
     detail: {},
@@ -8,8 +20,15 @@ export const house = {
     page: CommonEnum.PAGE,
     showLoading: true,
     reloadCommentsNum: 0,
+    order: null,
   },
   reducers: {
+    setOrder(state: any, payload: any) {
+      return {
+        ...state,
+        order: payload,
+      };
+    },
     getDetail(state: any, payload: any) {
       return {
         ...state,
@@ -90,6 +109,15 @@ export const house = {
           payload: {},
         });
       }
+    },
+    async hasOrderAsync(dispatch: any, rootState: any, payload: any) {
+      return await handleOrder('/orders/hasOrder', dispatch, payload);
+    },
+    async addOrderAsync(dispatch: any, rootState: any, payload: any) {
+      return await handleOrder('/orders/addOrder', dispatch, payload);
+    },
+    async delOrderAsync(dispatch: any, rootState: any, payload: any) {
+      return await handleOrder('/orders/delOrder', dispatch, payload);
     },
   },
 };
