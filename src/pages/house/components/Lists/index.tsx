@@ -13,16 +13,16 @@ const Lists: React.FC<ListsProps> = ({ showLoading, lists }) => {
     <div className="comment">
       <h1 className="comment-title">评论列表</h1>
       <div className="comment-lists">
-        {(lists || []).map(({ avatar, id, username, createTime, info }) => {
+        {(lists || []).map(({ user, id, createTime, msg }) => {
           return (
             <div className="comment-lists_item" key={id}>
-              <img alt="user" className="avatar" src={avatar} />
+              <img alt="user" className="avatar" src={user.avatar} />
               <div className="right">
                 <div className="right-top">
-                  <p>{username}</p>
+                  <p>{user.username}</p>
                   <p>{timer(createTime)}</p>
                 </div>
-                <div className="right-bottom">{info}</div>
+                <div className="right-bottom">{msg}</div>
               </div>
             </div>
           );

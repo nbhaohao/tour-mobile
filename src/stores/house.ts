@@ -63,7 +63,7 @@ export const house = {
     async getCommentsAsync(dispatch: any, rootState: any, payload: any) {
       const { comments, page } = rootState.house;
       const lists: any = await Http({
-        url: '/comments/lists',
+        url: '/comment/lists',
         body: {
           ...payload,
           pageSize: page.pageSize,
@@ -81,7 +81,7 @@ export const house = {
     },
     async addCommentsAsync(dispatch: any, rootState: any, payload: any) {
       const result = await Http({
-        url: '/comments/add',
+        url: '/comment/add',
         body: payload,
       });
       if (result) {

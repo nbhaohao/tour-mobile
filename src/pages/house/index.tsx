@@ -45,7 +45,9 @@ const House: React.FC = () => {
     });
   }, []);
   useEffect(() => {
-    getCommentsAsync({});
+    getCommentsAsync({
+      houseId: query?.id,
+    });
   }, [reloadCommentsNum]);
   useEffect(() => {
     return () => {

@@ -1,10 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { TextareaItem, Button, Toast, Modal } from 'antd-mobile';
 import { useStoreHook } from 'think-react-store';
+import { useLocation } from 'umi';
 
 const Footer: React.FC = React.memo(() => {
   const [show, setShow] = useState(false);
   const [commentsValue, setCommentsValue] = useState('');
+  // @ts-ignore
+  const { query } = useLocation();
   const {
     house: { addCommentsAsync },
   } = useStoreHook();
@@ -22,6 +25,7 @@ const Footer: React.FC = React.memo(() => {
     setShow(false);
     addCommentsAsync({
       comment: commentsValue,
+      houseId: query?.id,
     });
   };
   return (

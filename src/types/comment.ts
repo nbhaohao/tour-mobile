@@ -1,9 +1,10 @@
+import { User } from '@/types/user';
+
 export interface Comment {
   id: number;
-  avatar: string;
-  username: string;
   createTime: number;
-  info: string;
+  user: User;
+  msg: string;
 }
 
 export type Comments = Array<Comment>;
