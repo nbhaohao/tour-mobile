@@ -38,7 +38,7 @@ export async function Http<R>({
     params.body = JSON.stringify(body);
   }
   return new Promise((resolve, reject) => {
-    fetch('/api' + url, params)
+    fetch('http://8.136.222.10:7001/api' + url, params)
       .then((res) => res.json())
       .then((res) => {
         if (res.status === 200) {
@@ -46,7 +46,7 @@ export async function Http<R>({
           setResult && setResult(res.data);
         } else {
           if (res.status === 1001) {
-            location.href = `/login?from=${window.encodeURIComponent(
+            location.hash = `#/login?from=${window.encodeURIComponent(
               location.pathname + location.search,
             )}`;
             localStorage.clear();
