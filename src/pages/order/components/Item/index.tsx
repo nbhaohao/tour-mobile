@@ -2,12 +2,17 @@ import React from 'react';
 import { Order, OrderType } from '@/types/order';
 import timer from '@/utils/timer';
 import { Button } from 'antd-mobile';
+import { House } from '@/types/house';
 
-interface ItemProps extends Order {
+interface ItemProps {
   type: OrderType;
+  house: House;
+  order: Order;
 }
 
-const Item: React.FC<ItemProps> = ({ type, img, title, price, createTime }) => {
+const Item: React.FC<ItemProps> = ({ type, house, order }) => {
+  const { imgs, name, price } = house;
+  const { create_time } = order;
   const renderPay = () => {
     switch (type) {
       case OrderType.NEED_PAY:
@@ -25,11 +30,11 @@ const Item: React.FC<ItemProps> = ({ type, img, title, price, createTime }) => {
 
   return (
     <div className="order-item">
-      <img alt="order" src={img} />
+      <img alt="order" src={imgs?.[0]?.url || ''} />
       <div className="center">
-        <div className="title">{title}</div>
+        <div className="title">{name}</div>
         <div className="price">¥{price}</div>
-        <div className="time">{timer(createTime)}</div>
+        <div className="time">{timer(create_time)}</div>
       </div>
       <div className="pay">{renderPay()}</div>
     </div>

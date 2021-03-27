@@ -1,3 +1,5 @@
+import { House } from '@/types/house';
+
 export enum OrderType {
   NEED_PAY,
   PAY_COMPLETE = 1,
@@ -5,10 +7,7 @@ export enum OrderType {
 
 export interface Order {
   id: number;
-  img: string;
-  title: string;
-  info: string;
-  price: string;
+  house: House;
   create_time: string;
   is_payed: OrderType;
 }

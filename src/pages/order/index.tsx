@@ -37,14 +37,14 @@ const Order: React.FC = () => {
     callback: (result: Orders) => any,
   ) => {
     const result = await Http<Orders>({
-      url: '/order/lists',
+      url: '/orders/lists',
       body: {
         ...page,
         pageNum,
-        type,
+        is_payed: type,
       },
     });
-    if (!isEmpty(result) && result.length === page.pageSize) {
+    if (!isEmpty(result) && result.length <= page.pageSize) {
       setOrders(result);
       callback && callback(result);
       setShowLoading(true);

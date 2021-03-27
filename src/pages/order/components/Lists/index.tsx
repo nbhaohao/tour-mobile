@@ -15,12 +15,19 @@ interface ListsProps {
 const Lists: React.FC<ListsProps> = ({ orders, type, showLoading }) => {
   return (
     <div>
-      {isEmpty(orders) ? (
+      {isEmpty(orders) && showLoading ? (
         <OrderSkeletons />
       ) : (
         <div className="tab-lists">
           {orders.map((order) => {
-            return <Item type={type} key={order.id} {...order} />;
+            return (
+              <Item
+                type={type}
+                key={order.id}
+                house={order.house}
+                order={order}
+              />
+            );
           })}
           <ShowLoading showLoading={showLoading} />
         </div>
