@@ -47,7 +47,7 @@ export async function Http<R>({
         } else {
           if (res.status === 1001) {
             location.hash = `#/login?from=${window.encodeURIComponent(
-              location.pathname + location.search,
+              location.hash.slice(1) + location.search,
             )}`;
             localStorage.clear();
           }

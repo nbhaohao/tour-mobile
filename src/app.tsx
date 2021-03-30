@@ -3,7 +3,7 @@ import './global.css';
 
 export function onRouteChange(route: any) {
   const nowPath = route.routes[0].routes.filter(
-    (item: any) => item.path === route.location.pathname,
+    (item: any) => item.path === route.location.hash.slice(1),
   );
   // const isLogin = cookie.get('user');
   const isLogin = localStorage.getItem('token');
@@ -11,7 +11,7 @@ export function onRouteChange(route: any) {
     history.push({
       pathname: '/login',
       query: {
-        from: route.location.pathname,
+        from: route.location.hash.slice(1),
       },
     });
   }

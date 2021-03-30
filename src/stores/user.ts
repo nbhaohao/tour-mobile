@@ -83,7 +83,7 @@ export const user = {
       setTimeout(() => {
         localStorage.clear();
         location.hash = `#/login?from=${window.encodeURIComponent(
-          location.pathname + location.search,
+          location.hash.slice(1) + location.search,
         )}`;
       }, 1000);
     },
