@@ -7,7 +7,7 @@ import * as store from '@/stores';
 const Index: React.FC = ({ children }) => {
   const location = useLocation();
   const needBarPaths = useMemo(() => ['/', '/order', '/user'], []);
-  const pathname = location.hash.slice(1);
+  const pathname = location.pathname;
   const isShow = needBarPaths.includes(pathname);
   return (
     <StoreProvider store={store}>
