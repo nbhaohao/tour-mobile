@@ -1,11 +1,22 @@
 import { Http } from '@/utils/http';
 import { CommonEnum } from '@/enums';
+import { Toast } from 'antd-mobile';
 
-async function handleOrder(url: string, dispatch: any, payload: any) {
+async function handleOrder(
+  url: string,
+  dispatch: any,
+  payload: any,
+  type: string,
+) {
   const result = await Http({
     url,
     body: payload,
   });
+  if (type === 'add') {
+    Toast.success('预定成功');
+  } else if (type === 'del') {
+    Toast.success('取消预定成功');
+  }
   dispatch({
     type: 'setOrder',
     payload: result,
@@ -111,13 +122,13 @@ export const house = {
       }
     },
     async hasOrderAsync(dispatch: any, rootState: any, payload: any) {
-      return await handleOrder('/orders/hasOrder', dispatch, payload);
+      return await handleOrder('/orders/hasOrder', dispatch, payload, '');
     },
     async addOrderAsync(dispatch: any, rootState: any, payload: any) {
-      return await handleOrder('/orders/addOrder', dispatch, payload);
+      return await handleOrder('/orders/addOrder', dispatch, payload, 'add');
     },
     async delOrderAsync(dispatch: any, rootState: any, payload: any) {
-      return await handleOrder('/orders/delOrder', dispatch, payload);
+      return await handleOrder('/orders/delOrder', dispatch, payload, 'del');
     },
   },
 };
