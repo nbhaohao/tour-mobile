@@ -38,12 +38,30 @@ export async function Http<R>({
     params.body = JSON.stringify(body);
   }
   return new Promise((resolve, reject) => {
-    fetch(`${process.env.NODE_ENV === "development"? '/api' : 'http://8.136.222.10:7001/api'}` + url, params)
-      .then((res) => res.json())
+    fetch(
+      `${
+        process.env.NODE_ENV === 'development'
+          ? '/api'
+          : 'http://8.136.222.10:7001/api'
+      }` + url,
+      params,
+    )
+      .then((res) => {
+        if (res.status === 429) {
+          return {
+            status: 429,
+            errMsg: '请求频率过快，请60秒后在试',
+          };
+        }
+        return res.json();
+      })
       .then((res) => {
         if (res.status === 200) {
           resolve(res.data);
           setResult && setResult(res.data);
+        } else if (res.status === 429) {
+          Toast.fail(res.errMsg);
+          reject(res.errMsg);
         } else {
           if (res.status === 1001) {
             if (!location.hash.includes('#/login')) {
